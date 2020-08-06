@@ -1,0 +1,33 @@
+﻿Context
+This data set includes customers who have paid off their loans, who have been past due and put into collection without paying back their loan and interests, and who have paid off only after they were put in collection. The financial product is a bullet loan that customers should pay off all of their loan debt in just one time by the end of the term, instead of an installment schedule. Of course, they could pay off earlier than their pay schedule.
+
+Content
+Loan_id A unique loan number assigned to each loan customers
+고유번호
+
+Loan_status Whether a loan is paid off, in collection, new customer yet to payoff, or paid off after the collection efforts
+대출상태
+
+Principal Basic principal loan amount at the origination
+원금기초금액
+
+terms Can be weekly (7 days), biweekly, and monthly payoff schedule
+매주 (7 일), 격주, 월간 지불 일정 수
+
+Effective_date When the loan got originated and took effects
+대출이 시작되어 효과를 얻었을 때
+
+Due_date Since it’s one-time payoff schedule, each loan has one single due date
+일회성 지불 일정이기 때문에 각 대출에는 하나의 만기일이 있습니다
+
+Paidoff_time The actual time a customer pays off the loan
+고객이 대금을 지불 한 실제 시간
+
+Pastdue_days How many days a loan has been past due
+만기일이 지난 대출 기간
+
+Age, education, gender A customer’s basic demographic information
+나이, 학력, 성별
+
+성별에 따른 Pastdue_days
+나이에 따른 Pastdue_days

@@ -1,0 +1,81 @@
+#배틀그라운드 데이터 분석
+##파일 읽어오기
+```{r}
+pubg <- read.csv("C:\\Users\\HyunTaek\\Desktop\\study\\DoitR\\pubg\\PUBG_Player_Statistics.csv",header=T)
+head(pubg)
+solo <- pubg[1:52]
+head(solo)
+```
+
+## 패키지 부착
+```{r}
+library(dplyr)
+library(ggplot2)
+```
+
+## rawdata에서 solo 자료만 추출
+```{r}
+summary(solo$solo_Rating)
+solo <- solo %>%
+  mutate(grade = ifelse(solo_Rating <= 1477.2, "chobo",
+                        ifelse(solo_Rating <= 2041.1, "jungsu","gosu")))
+head(subset(solo, select=c("solo_Rating","grade")),10)
+table(solo$grade)
+```
+
+## 레이팅과 평균 킬
+```{r}
+kill_grade <- solo %>%
+  filter(!is.na(solo_KillsPg)) %>%
+  group_by(grade) %>%
+  summarise(mean_kills = mean(solo_KillsPg))
+kill_grade
+
+ggplot(data = kill_grade, aes(x=grade, y=mean_kills)) + 
+  geom_col() +
+  scale_x_discrete(limits=c("chobo","jungsu","gosu"))
+```
+### 레이팅과 평균킬은 반비례(?)
+
+
+## 레이팅과 평균 탑10
+```{r}
+top10 <- solo %>%
+  filter(!is.na(solo_Top10sPg)) %>%
+  group_by(grade) %>%
+  summarise(mean_top10 = mean(solo_Top10sPg))
+top10
+ggplot(data = top10, aes(x=grade, y = mean_top10))+
+  geom_col()+
+  scale_x_discrete(limits = c("chobo","jungsu","gosu"))
+```
+### 레이팅과 평균 탑10도 반비례(?)
+
+
+## 레이팅과 평균 생존시간
+```{r}
+head(solo)
+survive <- solo %>%
+  filter(!is.na(solo_AvgSurvivalTime)) %>%
+  group_by(grade) %>%
+  summarise(mean_survive = mean(solo_AvgSurvivalTime))
+survive
+ggplot(data = survive, aes(x=grade, y=mean_survive))+
+  geom_col()+
+  scale_x_discrete(limits = c("chobo","jungsu","gosu"))
+```
+### 레이팅과 평균 생존시간도 반비례(?)
+
+
+## 레이팅과 평균 이동거리
+```{r}
+distance <- solo %>%
+  filter(!is.na(solo_MoveDistancePg)) %>%
+  group_by(grade) %>%
+  summarise(mean_distance = mean(solo_MoveDistancePg))
+distance
+ggplot(data = distance, aes(x=grade, y=mean_distance))+
+  geom_col()+
+  scale_x_discrete(limits=c("chobo","jungsu","gosu"))
+```
+### 레이팅이 높을수록 이동거리도 많
