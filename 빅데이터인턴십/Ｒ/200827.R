@@ -350,6 +350,12 @@ sp500_px <- read.csv('C:\\Users\\User\\Desktop\\sht3898\\Data_Science\\빅데이
 sp500_sym <- read.csv('C:\\Users\\User\\Desktop\\sht3898\\Data_Science\\빅데이터인턴십\\Ｒ\\sp500_sym.csv', stringsAsFactors=FALSE)
 
 telecom <- sp500_px[, sp500_sym[sp500_sym$sector=="telecommunications_services", "symbol"]]
+
+tail(sp500_sym, 250)
+sp500_sym[sp500_sym$sector=="telecommunications_services", "symbol"]
+sp500_px
+telecom
+
 telecom <- telecom[row.names(telecom)>"2012-07-01",]
 telecom_cor <- cor(telecom)
 telecom_cor
