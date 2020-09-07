@@ -52,7 +52,7 @@ a <- 1
 a
 A
 
-a@ <- 2
+a <- 2
 
 initial_value <- 1
 initial_value
