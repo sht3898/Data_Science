@@ -11,6 +11,7 @@ paramset = 'serviceKey=' + serviceKey + '&pageNo=' + pageNo + '&numOfRows=' + nu
 
 url = endpoint + paramset
 result = requests.get(url).json()
+print(result)
 print(result['msgBody'])
 # bs_obj = bs4.BeautifulSoup(result.content, 'html.parser')
 # print(bs_obj)
